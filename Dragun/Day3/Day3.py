@@ -1,4 +1,4 @@
-with open("pain.txt") as f:
+with open("Dragun\Day3\Day3.txt") as f:
     schematic = [x.strip() for x in f.readlines()]
 
 total1 = 0
