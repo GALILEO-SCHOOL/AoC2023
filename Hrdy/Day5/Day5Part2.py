@@ -41,8 +41,10 @@ while len(Seeds) > 0:
     NewSeeds.append(Seeds[:2])
     Seeds = Seeds[2:]
 NewSeeds = sorted(NewSeeds,key=lambda x:x[0])
+
 print(NewSeeds)
-Counter = 0
+
+Seed = 0
 Location = 0
 Working = True
 while Working:
@@ -56,6 +58,6 @@ while Working:
             Working = False
             break
         else:
-            Counter += 1
-            Location = Counter
-print(Counter,Location)
+            Seed += 1
+            Location = Seed
+print(Seed,Location)
