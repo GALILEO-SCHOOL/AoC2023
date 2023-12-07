@@ -25,12 +25,12 @@ for y,row in enumerate(Schematic):
                         grad = 1
                         while CopySchematic[i][j-grad] in Numbers:
                             Num = CopySchematic[i][j-grad] + Num
-                            #CopySchematic[i][j-grad] = "."
+                            CopySchematic[i][j-grad] = "."
                             grad += 1
                         grad = 1
                         while CopySchematic[i][j+grad] in Numbers:
                             Num += CopySchematic[i][j+grad]
-                            #CopySchematic[i][j+grad] = "."
+                            CopySchematic[i][j+grad] = "."
                             grad += 1
                         Gears.append(Num)
             if len(Gears) == 2:

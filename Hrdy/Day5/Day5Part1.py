@@ -18,7 +18,7 @@ with open("Hrdy\Day5\Day5.txt","r") as f:
                 Map = []
         else: Map.append(line.strip())
     Manual.append(Map)
-FinalManual = []
+
 for i in range(1,len(Manual[0])):
     SeedToSoil.append([int(x) for x in Manual[0][i].split(" ")])
 for i in range(1,len(Manual[1])):
@@ -36,7 +36,7 @@ for i in range(1,len(Manual[6])):
 Manual = [SeedToSoil,SoilToFertilizer,FertiliserToWater,WaterToLight,LightToTemperature,TemperatureToHumidity,HumidityToLocation]
 #print(Seeds)
 #print(SeedToSoil,SoilToFertilizer,FertiliserToWater,WaterToLight,LightToTemperature,TemperatureToHumidity,HumidityToLocation)
-
+#print(Manual)
 #print(Seeds)
 for m in Manual:
     for index,seed in enumerate(Seeds):

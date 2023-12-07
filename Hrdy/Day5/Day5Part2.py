@@ -9,7 +9,7 @@ TemperatureToHumidity = []
 HumidityToLocation = []
 Manual = []
 
-with open("Hrdy\Day5\Day5.txt","r") as f:
+with open("Hrdy\Day5\Test.txt","r") as f:
     Seeds = [int(x) for x in f.readline().split(": ")[1].strip().split(" ")]
     for line in f:
         if line.strip() == "":
@@ -36,14 +36,26 @@ for i in range(1,len(Manual[6])):
 Manual = [SeedToSoil,SoilToFertilizer,FertiliserToWater,WaterToLight,LightToTemperature,TemperatureToHumidity,HumidityToLocation]
 #print(Seeds)
 #print(SeedToSoil,SoilToFertilizer,FertiliserToWater,WaterToLight,LightToTemperature,TemperatureToHumidity,HumidityToLocation)
-
-#print(Seeds)
-for m in Manual:
-    for index,seed in enumerate(Seeds):
+NewSeeds = []
+while len(Seeds) > 0:
+    NewSeeds.append(Seeds[:2])
+    Seeds = Seeds[2:]
+NewSeeds = sorted(NewSeeds,key=lambda x:x[0])
+print(NewSeeds)
+Counter = 0
+Location = 0
+Working = True
+while Working:
+    for m in Manual[::-1]:
         for r in m:
-            if seed in range(r[1],r[1]+r[2]):
-                Seeds[index] = seed+(r[0]-r[1])
+            if Location in range(r[1],r[1]-r[2]):
+                Location = Location-(r[0]+r[1])
                 break
-    #print(m,Seeds)
-
-print(min(Seeds))
+    for ran in NewSeeds:
+        if Location >= ran[0] and Location < (ran[0]+ran[1]):
+            Working = False
+            break
+        else:
+            Counter += 1
+            Location = Counter
+print(Counter,Location)
