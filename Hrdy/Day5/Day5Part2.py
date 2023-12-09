@@ -9,7 +9,7 @@ TemperatureToHumidity = []
 HumidityToLocation = []
 Manual = []
 
-with open("Hrdy\Day5\Test.txt","r") as f:
+with open("Hrdy\Day5\Day5.txt","r") as f:
     Seeds = [int(x) for x in f.readline().split(": ")[1].strip().split(" ")]
     for line in f:
         if line.strip() == "":
@@ -48,16 +48,17 @@ Seed = 0
 Location = 0
 Working = True
 while Working:
+    Seed += 1
+    Location = Seed
     for m in Manual[::-1]:
         for r in m:
-            if Location in range(r[1],r[1]-r[2]):
-                Location = Location-(r[0]+r[1])
+            if Location in range(r[0],r[0]+r[2]):
+                Location = Location-(r[0]-r[1])
                 break
     for ran in NewSeeds:
         if Location >= ran[0] and Location < (ran[0]+ran[1]):
             Working = False
             break
-        else:
-            Seed += 1
-            Location = Seed
 print(Seed,Location)
+
+#34039469 3751501334
