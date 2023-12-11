@@ -4,7 +4,7 @@ MarginOfError = []
 with open("Hrdy\Day6\Day6.txt","r") as f:
     for line in f:
         Races.append([x for x in line.strip().split(" ")[1:] if x != ""])
-#print(Races)
+print(Races)
 
 Time  = ""
 Distance = ""
