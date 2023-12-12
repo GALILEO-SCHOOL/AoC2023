@@ -6,7 +6,7 @@ Three = []
 FullHours = []
 Quad = []
 Five = []
-Values = {"T":10,"J":11,"Q":12,"K":13,"A":14}
+Values = {"T":10,"J":1,"Q":12,"K":13,"A":14}
 
 with open("Hrdy\Day7\Day7.txt","r") as f:
     for line in f:
@@ -19,27 +19,29 @@ for i,hand in enumerate(Hands):
         else:
             Hands[i][0][j] = int(Hands[i][0][j])
 
-
-
 for index,hand in enumerate(Hands):
     Cards = {}
+    Jokers = 0
     for card in hand[0]:
-        if card not in Cards:
+        if card == 1:
+            Jokers += 1
+        elif card not in Cards:
             Cards[card] = 1
         else:
-            Cards[card] += 1 
+            Cards[card] += 1     
     Cards = dict(sorted(Cards.items(),key = lambda item : item[1],reverse=True))
-    if max(Cards.values()) == 5:
+    if len(Cards) == 0: Cards = {1:5}
+    if max(Cards.values()) + Jokers == 5:
         Five.append(hand)
-    elif max(Cards.values()) == 4:
+    elif max(Cards.values()) + Jokers == 4:
         Quad.append(hand)
-    elif max(Cards.values()) == 3:
-        if 2 in Cards.values():
+    elif max(Cards.values()) + Jokers == 3:
+        if min(Cards.values()) == 2:
             FullHours.append(hand)
         else:
             Three.append(hand)
-    elif max(Cards.values()) == 2:
-        if len(Cards.values()) == 3:
+    elif max(Cards.values()) + Jokers == 2: 
+        if len(Cards) == 3: 
             TwoPair.append(hand)
         else: Pair.append(hand)
     else: HighCard.append(hand)
@@ -61,5 +63,7 @@ for Type in Hands:
         Winnings += hand[1]*rank
         rank += 1
 
-print(Hands[1])
+print(Hands[3])
 print(Winnings)
+
+#254759968 too low
