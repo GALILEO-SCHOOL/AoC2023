@@ -30,8 +30,8 @@ for index,hand in enumerate(Hands):
         else:
             Cards[card] += 1     
     Cards = dict(sorted(Cards.items(),key = lambda item : item[1],reverse=True))
-    if len(Cards) == 0: Cards = {1:5}
-    if max(Cards.values()) + Jokers == 5:
+    if len(Cards) == 0: Five.append(hand)
+    elif max(Cards.values()) + Jokers == 5:
         Five.append(hand)
     elif max(Cards.values()) + Jokers == 4:
         Quad.append(hand)
@@ -63,7 +63,8 @@ for Type in Hands:
         Winnings += hand[1]*rank
         rank += 1
 
-print(Hands[3])
+print(Hands[6])
 print(Winnings)
 
-#254759968 too low
+
+#254837398
