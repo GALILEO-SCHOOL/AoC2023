@@ -32,7 +32,5 @@ for i in range(len(galaxies)-1):
         y_difference = abs((galaxies[i][0] + galaxies[i][2]) - (galaxies[j][0] + galaxies[j][2]))
         x_difference = abs((galaxies[i][1] + galaxies[i][3]) - (galaxies[j][1] + galaxies[j][3]))
         total_distance += y_difference + x_difference
-           
-print(universe)
-print(galaxies)
+
 print(total_distance)
