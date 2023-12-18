@@ -1,8 +1,8 @@
 PipeMap = []
 StartPos = []
-with open("Hrdy\Day10\Test.txt","r") as f:
+with open("Hrdy\Day10\Day10.txt","r") as f:
     for row,line in enumerate(f):
-        PipeMap.append(line.strip())
+        PipeMap.append([x for x in line.strip()])
         if "S" in line:
             StartPos = [line.index("S"),row]
 
@@ -20,16 +20,88 @@ if PipeMap[StartPos[1]-1][StartPos[0]] in Up:
     Positions.append([StartPos[1]-1,StartPos[0],"U"])
 if PipeMap[StartPos[1]+1][StartPos[0]] in Down:
     Positions.append([StartPos[1]+1,StartPos[0],"D"])
-Steps = 1
+
+
+Steps = 0
 Done = False
-while not Done:
+while True:
+    Steps += 1
     Done = True
     for Index,Pos in enumerate(Positions):
-        Pipe = PipeMap[Pos[1]][Pos[0]]
-        
-    Steps += 1
+        if PipeMap[Pos[0]][Pos[1]] == "-":
+            if Pos[2] == "R":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0],Pos[1]+1,"R"]
+                Done = False
+            elif Pos[2] == "L":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0],Pos[1]-1,"L"]
+                Done = False
+        elif PipeMap[Pos[0]][Pos[1]] == "|":
+            if Pos[2] == "U":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0]-1,Pos[1],"U"]
+                Done = False
+            elif Pos[2] == "D":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0]+1,Pos[1],"D"]
+                Done = False
 
-print(Steps)
+        elif PipeMap[Pos[0]][Pos[1]] == "L":
+            if Pos[2] == "D":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0],Pos[1]+1,"R"]
+                Done = False
+            elif Pos[2] == "L":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0]-1,Pos[1],"U"]
+                Done = False
+
+        elif PipeMap[Pos[0]][Pos[1]] == "J":
+            if Pos[2] == "D":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0],Pos[1]-1,"L"]
+                Done = False
+            elif Pos[2] == "R":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0]-1,Pos[1],"U"]
+                Done = False
+
+        elif PipeMap[Pos[0]][Pos[1]] == "7":
+            if Pos[2] == "R":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0]+1,Pos[1],"D"]
+                Done = False
+            elif Pos[2] == "U":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0],Pos[1]-1,"L"]
+                Done = False   
+        elif PipeMap[Pos[0]][Pos[1]] == "F":
+            if Pos[2] == "U":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0],Pos[1]+1,"R"]
+                Done = False
+            elif Pos[2] == "L":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0]+1,Pos[1],"D"]
+                Done = False   
+        elif PipeMap[Pos[0]][Pos[1]] == "J":
+            if Pos[2] == "D":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0],Pos[1]-1,"L"]
+                Done = False
+            elif Pos[2] == "R":
+                PipeMap[Pos[0]][Pos[1]] = Steps
+                Positions[Index] = [Pos[0]-1,Pos[1],"U"]
+                Done = False   
+    if Done: break     
+
+
+for l in PipeMap:
+    print(l)
+
+
+print(Steps -1)
 
 
         
