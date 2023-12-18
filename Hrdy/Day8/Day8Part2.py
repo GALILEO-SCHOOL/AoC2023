@@ -2,7 +2,6 @@ from math import lcm
 Map = {}
 Steps = 0
 
-
 with open("Hrdy\Day8\Day8.txt","r") as f:
     Instruction = [x for x in f.readline().strip()]
     f.readline()
@@ -34,4 +33,3 @@ for Exit in Exits:
     Solution = lcm(Solution,Exit[0])
 
 print(Solution)
-#BRUTE FORCE IS NOT THE WAY!
