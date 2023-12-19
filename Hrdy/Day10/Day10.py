@@ -6,6 +6,7 @@ with open("Hrdy\Day10\Day10.txt","r") as f:
         if "S" in line:
             StartPos = [line.index("S"),row]
 
+PipeMap[StartPos[1]][StartPos[0]] = 0
 
 Positions = []
 Right = ["-","J","7"]
@@ -104,9 +105,6 @@ for l in PipeMap:
 print(Steps -1)
 
 
-        
-
-
 
 # | is a vertical pipe connecting north and south.
 # - is a horizontal pipe connecting east and west.
@@ -116,3 +114,45 @@ print(Steps -1)
 # F is a 90-degree bend connecting south and east.
 # . is ground; there is no pipe in this tile.
 # S is the starting position of the animal; there is a pipe on this tile, but your sketch doesn't show what shape the pipe has.
+Contained = 0
+for y,row in reversed(list(enumerate(PipeMap))):
+    XInside = False
+    for x,col in reversed(list(enumerate(row))):
+        if isinstance(col,int):
+            if not XInside:
+                XInside = True
+            else:
+                XInside = False
+        elif XInside:
+            PipeMap[y][x] = "X"
+
+
+for x in range(len(PipeMap[0])-1,-1,-1):
+    YInside = False
+    for y in range(len(PipeMap)-1,-1,-1):
+        if isinstance(PipeMap[y][x],int):
+            if YInside: YInside = False
+            else: YInside = True
+        elif YInside:
+            if PipeMap[y][x] == "X":
+                PipeMap[y][x] = "XY"
+                Contained += 1
+            else: PipeMap[y][x] = "Y"
+
+
+
+
+print(Contained)   
+
+
+with open("Hrdy\Day10\Solution.txt","w") as f:
+    for l in PipeMap:
+        line = ""
+        for c in l:
+            if isinstance(c,int):
+                line += "0"
+            else:
+                line += c
+        f.writelines(line + "\n")
+
+#509 is too low
