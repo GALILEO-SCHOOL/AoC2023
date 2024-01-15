@@ -1,4 +1,4 @@
-with open("Hrdy\Day11\Test.txt","r") as f:
+with open("Hrdy\Day11\Day11.txt","r") as f:
     Universe = []
     Galaxies = []
     AmountOfGalaxies = 1
@@ -19,7 +19,7 @@ with open("Hrdy\Day11\Test.txt","r") as f:
         Universe.append(Row)
 
 
-ExpansionRate = 1
+ExpansionRate = 999999
 
 Horizont = [x[2] for x in Galaxies]
 VerticalLimit = [x[1] for x in Galaxies]
@@ -28,7 +28,7 @@ Expansion = 0
 for x in range(max(Horizont)):
     if x not in Horizont:
         for index,Gala in enumerate(Galaxies):
-            if Gala[2] > x+Expansion:
+            if Gala[2] > x:
                 Galaxies[index][4] += ExpansionRate
         Expansion += 1
 
@@ -36,7 +36,7 @@ Expansion = 0
 for y in range(max(VerticalLimit)):
     if y not in VerticalLimit:
         for index,Gala in enumerate(Galaxies):
-            if Gala[1] > y+Expansion:
+            if Gala[1] > y:
                 Galaxies[index][3] += ExpansionRate
         Expansion += 1
 
@@ -48,7 +48,7 @@ Distance = 0
 for i,Gal in enumerate(Galaxies):
     Galaxies[i][1] += Galaxies[i][3]
     Galaxies[i][2] += Galaxies[i][4]
-print(Galaxies)
+#print(Galaxies)
 for i in range(len(Galaxies)-1):
     for j in range(i+1,len(Galaxies)):
         Distance += abs((Galaxies[i][1]) - (Galaxies[j][1])) + abs((Galaxies[i][2]) - (Galaxies[j][2]))
